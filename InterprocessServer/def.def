@@ -1,0 +1,13 @@
+LIBRARY InterprocessServer
+
+EXPORTS
+
+CreateMemMap
+DeleteMemMap
+Write
+Read
+WriteInt32
+ReadInt32
+ISInfo
+Test
+RefTest

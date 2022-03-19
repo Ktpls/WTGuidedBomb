@@ -1,0 +1,3 @@
+从机库到进游戏的过场动画时8111没反应
+在机库时indicators和state的['valid']==false
+直接使用按键精灵的keypress和mouseclick没用，或者说很少起效。使用down和up来手动实现它们

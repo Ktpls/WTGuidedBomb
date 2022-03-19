@@ -1,0 +1,49 @@
+alloc
+	cmdstate	0
+	exestate	1
+	cmdindex	2
+	exeindex	3
+	cmd	4
+cmdstate&exestate
+	default	0
+	online	1
+	logout	2
+cmd
+	notice that keydown,keyup are called pykeydown,pykeyup in qm side for those names are already taken
+	NAME	ARG	RET	CODE
+	nop	void	void	0
+	exitserver	void	void	1
+	setresponsetime	t	void	2
+	servertest	void	void	3
+	keypress	keycode	void	4
+	keydown	keycode	void	5
+	keyup	keycode	void	6
+	mousepress	keycode	void	7
+	mousedown	keycode	void	8
+	mouseup	keycode	void	9
+	mousemove	x,y	void	10
+	mouserelativemove	x,y	void	11
+	sethwnd	hwnd	void	12
+cmd/exeindex
+	for cmd side:
+		while(true): #wait for command to finish
+			if cmdindex==exeindex:
+				break
+		cmd=$CMD
+		cmdindex++
+		
+		cmd==exe means exe side has finished all commands it needs to finish, waiting for next command
+		cmd==exe-1 means exe side is still working on last command
+	for exe side:
+		do
+			do 'waiting for new command
+				if cmdindex>exeindex then
+					exit do
+				end if
+			loop
+			Execute new command
+			exeindex++
+		loop
+		
+		cmd==exe means cmd side has not sent new command yet, exe side should wait for next command
+		cmd=exe+1 means one more command needs to be worked out
